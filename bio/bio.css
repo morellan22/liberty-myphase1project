@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.profile-img {
+  width: 150px;
+  height: auto;
+  display: flex;
+  border-radius:50%;
+}
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  padding: 20px;
+  background: linear-gradient(#c8e4d9 10%, #f4f4f4);
+}
+header {
+  text-align: center;
+  margin-bottom: 20px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  align-items: center;
+}
+header > p{
+  font-size: 1em;
+  font-weight: bold;
+}
+h1 {
+  margin: 10px;
+  color:green;
+}
+.bio,
+.projects {
+  margin-bottom: 20px;
+  
+}
+.bio{
+    display: flex;
+    width:100%;
+    padding-left: 5%;
+    justify-content: center;
+}
+.bio h4{
+    color: rgb(86, 114, 74);
+    margin: 5%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.bio p{
+  margin-top: 5%;
+  font-size: 0.8em;
+  align-items: center;
+}
+.projects {
+    color: rgb(86, 114, 74);
+    display: flex;
+    width:90%;
+    justify-content: center;
+    flex:1;
+}
+a {
+  color: #333;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  color: green;
+}
+footer {
+  text-align: center;
+  margin-top: 20px;
+  background-color: #c8e4d9;
+}
+footer > p:first-of-type{
+  font-weight: bold;
+  font-size: 1em;
+}
+footer > p > a{
+  font-size: 0.8em;
+  font-weight: normal;
+}
+footer > p{
+  font-size: 0.7em;
+}
+ul{
+  display: flex;
+  flex-flow: row wrap;  
+  align-items:stretch;
+  align-content: center;
+  justify-content: center;
+  padding: 3%;
+}
+ul > li{
+  display:flex;
+  width: 100%;
+  flex-direction: column;
+  flex: 1;
+  font-size: 0.9em;
+}
+ul > li > h4{
+  background-color: rgb(231, 245, 212);
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 5%;
+  text-align: center;
+  margin-left: 1%;
+  border-radius: 10%;
+  font-size: 1.5em;
+  }
+  figure{
+   display: flex;
+   flex-flow: column wrap;
+   align-items: stretch;
+   align-content: center;
+   justify-content: center;
+   
+  }
+  [src|="images"] {
+    width: 150px;
+  height: auto;
+  }
+  figcaption{
+    font-size: 0.8em;
+  }
