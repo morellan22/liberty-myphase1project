@@ -1,77 +1,70 @@
-const items = [
-  {
-    "id": 0,
-    "name": "Mike Johnsons",
-    "email": "mikej@abc.com",
-    "password": "mikej"
-  },
-  {
-    "name": "Cindy Smiths",
-    "email": "cinds@abc.com",
-    "password": "cinds",
-    "id": 1
-  },
-  {
-    "name": "Julio Martins",
-    "email": "julim@abc.com",
-    "password": "julim",
-    "id": 2
+const baseURL = "http://localhost:4000/customers/";
+const fetchData = async (url, myInit) => {
+  try {
+    const response = await fetch(url, myInit);
+    if (!response.ok) {
+      throw new Error(`Error fetching data: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    alert(error);
   }
-]
-
-
-export function getAll(){
-  return items;
+};
+export async function getAll(setCustomers) {
+  const myInit = { method: 'GET', mode: 'cors' };
+  const data = await fetchData(baseURL, myInit);
+  return setCustomers(data);
 }
 
-export function get(id) {
-  let result = null;
-  for( let item of items){
-      if(item.id === id){
-          result = item;
-      }
-  }
+
+export async function get(id) {
+  const myInit = {
+    method: "GET",
+    mode: "cors",
+  };
+  
+  let result =  await fetchData(baseURL+id, myInit);
 return result;
 }
 
-export function deleteById(id) {
-let arrayIndex = getArrayIndexForId(id);
-if( arrayIndex >= 0 && arrayIndex < items.length){
-  items.splice(arrayIndex,1);
-}
-}
-
-export function post(item) {
-let nextid = getNextId();
-item.id = nextid;
-items[items.length] = item;
+export async function deleteById(id,postOpCallback) {
+  let myInit = { method: 'DELETE', mode: 'cors' };
+  await fetchData(baseURL+id, myInit); 
+  return postOpCallback();
 }
 
-export function put(id, item) {
-for( let i = 0; i < items.length; i++){
-  if(items[i].id === id){
-    items[i] = item;
-    return;
-  }
-}
+export async function post(item, postOpCallback) {
+  delete item.id;
+  let body = JSON.stringify(item);
+  let myInit = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+   },
+    body: body,
+    mode: 'cors'
+  };
+  console.log(myInit)
+   await fetchData(baseURL, myInit);
+   return postOpCallback();
+  
 }
 
-function getArrayIndexForId(id){
-for( let i = 0; i < items.length; i++){
-  if(items[i].id === id){
-    return i;
-  }
-}
-return -1;  
+export async function put(id, item,postOpCallback) {
+  let body = JSON.stringify(item);
+  console.log(item)
+  let myInit = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+   },
+    body: body,
+    mode: 'cors'
+  };
+  await fetchData(baseURL+id, myInit);
+  return postOpCallback();
 }
 
-
-function getNextId(){
-let maxid = 0;
-for( let item of items){
-  maxid = (item.id > maxid)?item.id:maxid;
-}  
-return maxid + 1;
-}
 
 

@@ -20,11 +20,11 @@ export function App(params) {
   // useEffect
   useEffect(() => {
     getCustomers();
-  }, []);
+  }, [formObject]);
 
   const getCustomers = function () {
     log("in getCustomers()");
-    setCustomers(getAll());
+    getAll(setCustomers);
   };
 
   const handleListClick = function (item) {
@@ -49,23 +49,26 @@ export function App(params) {
     setFormObject(blankCustomer);
   };
 
+  let postOpCallback = () => { setFormObject(blankCustomer); }
   let onDeleteClick = function () {
     log("in onDeleteClick()");
     if (formObject.id >= 0) {
-      deleteById(formObject.id);
+      deleteById(formObject.id, postOpCallback);
     }
-    setFormObject(blankCustomer);
   };
 
   let onSaveClick = function () {
     log("in onSaveClick()");
     if (mode === "Add") {
-      post(formObject);
+      log("in Add");
+      log(formObject)
+      post(formObject, postOpCallback);
     }
     if (mode === "Update") {
-      put(formObject.id, formObject);
+      log("in Update");
+      log(formObject)
+      put(formObject.id, formObject, postOpCallback);
     }
-    setFormObject(blankCustomer);
   };
 
   return (
